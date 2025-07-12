@@ -1,7 +1,7 @@
 ## 🔷 **1️⃣ Tools and Environment**
 
 * **Tujuan:**
-  Peserta mengenal & mampu menginstal serta menggunakan software & tools dasar untuk pengembangan robotika & AI.
+  Peserta mengenal & mampu menginstal serta menggunakan software & tools dasar untuk pengembangan robotika.
 * **Manfaat:**
   Peserta terbiasa dengan workflow profesional & siap bekerja dalam tim dengan standar industri.
 * **Materi:**
@@ -17,7 +17,7 @@
 ## 🔷 **2️⃣ Sub Sistem Linux**
 
 * **Tujuan:**
-  Peserta memahami struktur, perintah dasar, & pengelolaan sistem berbasis Linux yang umum digunakan pada robot & server.
+  Peserta memahami struktur, perintah dasar, & pengelolaan sistem berbasis Linux yang umum digunakan pada robot.
 * **Manfaat:**
   Peserta lebih mudah beradaptasi pada sistem berbasis ROS & embedded Linux.
 * **Materi:**
