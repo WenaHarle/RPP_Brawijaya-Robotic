@@ -5,10 +5,10 @@
 * **Manfaat:**
   Peserta terbiasa dengan workflow profesional & siap bekerja dalam tim dengan standar industri.
 * **Materi:**
-  IDE & Code Editor (VSCode, Arduino IDE, CubeIDE)
-  Version control (Git & GitHub)
-  Python & C++ dasar.
-  Copilot.
+  - IDE & Code Editor (VSCode, Arduino IDE, CubeIDE)
+  - Version control (Git & GitHub)
+  - Python & C++ dasar
+  - Copilot
 * **Output:**
   Lingkungan kerja siap pakai, peserta bisa setup proyek secara mandiri.
 
@@ -21,10 +21,10 @@
 * **Manfaat:**
   Peserta lebih mudah beradaptasi pada sistem berbasis ROS & embedded Linux.
 * **Materi:**
-  Struktur file & permission Linux
-  Bash scripting dasar
-  Proses & service management
-  Networking & device driver basics
+  - Struktur file & permission Linux
+  - Bash scripting dasar
+  - Proses & service management
+  - Networking & device driver basics
 * **Output:**
   Peserta bisa mengelola sistem Linux & menjalankan skrip untuk robot.
 
@@ -37,9 +37,10 @@
 * **Manfaat:**
   Peserta mampu membangun sistem robot yang optimal.
 * **Materi:**
-  Pengenalan Clock Timer dan Interrupt.
-  GPIO, komunikasi I2C/SPI/UART
-  Optimalisasi Algoritma
+  - Pengenalan Clock, Timer, & Interrupt
+  - GPIO
+  - Komunikasi I2C/SPI/UART
+  - Optimalisasi algoritma
 * **Output:**
   Proyek kecil: robot sederhana yang bergerak dengan sensor & motor.
 
@@ -52,10 +53,10 @@
 * **Manfaat:**
   Peserta mampu memahami & membuat model AI sederhana untuk deteksi & pengambilan keputusan.
 * **Materi:**
-  Definisi AI, ML, DL
-  Dataset & data preprocessing
-  Algoritme klasik: Decision Tree, SVM
-  Neural network dasar & inference
+  - Definisi AI, ML, DL
+  - Dataset & data preprocessing
+  - Algoritme klasik: Decision Tree, SVM
+  - Neural network dasar & inference
 * **Output:**
   Model sederhana untuk klasifikasi/deteksi.
 
@@ -68,10 +69,10 @@
 * **Manfaat:**
   Peserta lebih produktif & mampu memanfaatkan AI asisten secara maksimal untuk coding, dokumentasi, & analisis.
 * **Materi:**
-  Dasar LLM & cara kerjanya
-  Teknik prompt: zero-shot, few-shot, chain-of-thought
-  Optimasi & debugging prompt
-  Studi kasus untuk kode, teks, analisis
+  - Dasar LLM & cara kerjanya
+  - Teknik prompt: zero-shot, few-shot, chain-of-thought
+  - Optimasi & debugging prompt
+  - Studi kasus untuk kode, teks, analisis
 * **Output:**
   Prompt efektif & reproducible untuk berbagai kebutuhan.
 
@@ -84,10 +85,11 @@
 * **Manfaat:**
   Peserta mampu menganalisis & menghitung posisi joint & end-effector robot manipulator/mobile.
 * **Materi:**
-  Sistem koordinat & transformasi
-  Kinematik maju & inverse
-  Derajat kebebasan (DOF)
-  Contoh kasus manipulator & mobile robot
+  - Sistem koordinat & transformasi
+  - Kinematik maju
+  - Kinematik inverse
+  - Derajat kebebasan (DOF)
+  - Contoh kasus manipulator & mobile robot
 * **Output:**
   Simulasi perhitungan posisi joint & end-effector.
 
@@ -100,9 +102,10 @@
 * **Manfaat:**
   Peserta bisa melakukan desain, pengujian, & debugging robot tanpa perangkat keras.
 * **Materi:**
-  Pengenalan URDF (Unified Robot Description Format)
-  Visualisasi di RViz & Gazebo
-  Dasar-dasar simulasi dinamika 3D
+  - Pengenalan URDF (Unified Robot Description Format)
+  - Visualisasi di RViz
+  - Visualisasi di Gazebo
+  - Dasar-dasar simulasi dinamika 3D
 * **Output:**
   URDF & visualisasi robot di RViz/Gazebo.
 
@@ -115,10 +118,10 @@
 * **Manfaat:**
   Peserta siap membuat solusi nyata di environment kompleks dengan navigasi & path planning.
 * **Materi:**
-  Membuat environment simulasi
-  Navigasi & path planning
-  Interaksi multi-robot
-  Integrasi sensor virtual & map
+  - Membuat environment simulasi
+  - Navigasi & path planning
+  - Interaksi multi-robot
+  - Integrasi sensor virtual & map
 * **Output:**
   Proyek akhir: robot menyelesaikan misi di simulasi environment.
 
