@@ -1,2 +1,2 @@
 # RPP_Brawijaya-Robotic
-Baagian-bagian
+Bagian-bagian
