@@ -287,8 +287,6 @@ git branch
 ```bash
 # Pindah ke branch fitur-sensor
 git checkout fitur-sensor
-# atau gunakan perintah modern:
-git checkout fitur-sensor
 
 # Cek posisi sekarang
 git branch
