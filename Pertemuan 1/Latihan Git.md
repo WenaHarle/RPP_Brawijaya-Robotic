@@ -476,6 +476,21 @@ git commit -m "Merge servo and calibration features"
 
 ### 🔬 Percobaan 8: Bekerja dengan Remote Repository (GitHub)
 
+```bash
+# Abaikan semua file sementara dan log
+*.log
+*.tmp
+*.bak
+
+# Abaikan folder build dan dist
+/build/
+/dist/
+
+# Abaikan file konfigurasi pribadi
+.env
+config.local.json
+```
+
 #### Setup GitHub
 
 1. Buat akun di [github.com](https://github.com)
