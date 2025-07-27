@@ -130,3 +130,33 @@ git push -u origin main
 3. Buat 2 branch berbeda: `desain`, `fitur-x`.
 4. Tambah file berbeda di tiap branch.
 5. Merge ke main.
+
+
+| No | Perintah Git                  | Fungsi                                            | Contoh Penggunaan                                          |
+| -- | ----------------------------- | ------------------------------------------------- | ---------------------------------------------------------- |
+| 1  | `git init`                    | Membuat repository Git lokal baru                 | `git init`                                                 |
+| 2  | `git clone <url>`             | Mengunduh repo dari remote (misal GitHub)         | `git clone https://github.com/user/projek.git`             |
+| 3  | `git status`                  | Melihat status file (modified, staged, untracked) | `git status`                                               |
+| 4  | `git add <file>`              | Menambahkan file ke staging area                  | `git add index.html`                                       |
+| 5  | `git add .`                   | Menambahkan semua file ke staging area            | `git add .`                                                |
+| 6  | `git commit -m "pesan"`       | Menyimpan perubahan dengan pesan                  | `git commit -m "Tambah fitur login"`                       |
+| 7  | `git log`                     | Melihat riwayat commit                            | `git log`                                                  |
+| 8  | `git diff`                    | Melihat perbedaan antar versi file                | `git diff`                                                 |
+| 9  | `git branch`                  | Melihat semua branch                              | `git branch`                                               |
+| 10 | `git branch <nama>`           | Membuat branch baru                               | `git branch fitur-login`                                   |
+| 11 | `git checkout <nama>`         | Pindah ke branch tertentu                         | `git checkout fitur-login`                                 |
+| 12 | `git switch <nama>`           | Alternatif modern untuk `checkout`                | `git switch main`                                          |
+| 13 | `git merge <branch>`          | Menggabungkan branch ke branch aktif              | `git merge fitur-login`                                    |
+| 14 | `git remote add origin <url>` | Menyambungkan repo lokal ke GitHub                | `git remote add origin https://github.com/user/projek.git` |
+| 15 | `git push -u origin <branch>` | Mengirim commit ke remote pertama kali            | `git push -u origin main`                                  |
+| 16 | `git push`                    | Mengirim perubahan ke remote                      | `git push`                                                 |
+| 17 | `git pull`                    | Mengambil dan menggabungkan dari remote           | `git pull`                                                 |
+| 18 | `git fetch`                   | Mengambil update dari remote tanpa merge          | `git fetch`                                                |
+| 19 | `git reset --hard <commit>`   | Mengembalikan repo ke commit tertentu             | `git reset --hard a1b2c3d`                                 |
+| 20 | `git rm <file>`               | Menghapus file dan mencatatnya di Git             | `git rm data.txt`                                          |
+| 21 | `git restore <file>`          | Mengembalikan file ke versi terakhir commit       | `git restore index.html`                                   |
+| 22 | `git stash`                   | Menyimpan perubahan sementara                     | `git stash`                                                |
+| 23 | `git stash pop`               | Mengambil kembali perubahan dari stash            | `git stash pop`                                            |
+| 24 | `git tag <nama>`              | Memberi tag pada commit                           | `git tag v1.0.0`                                           |
+| 25 | `git config`                  | Mengatur konfigurasi Git (nama/email dll.)        | `git config --global user.name "Budi"`                     |
+
