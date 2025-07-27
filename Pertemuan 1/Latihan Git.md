@@ -1,14 +1,16 @@
-# 📚 Panduan Git
+### Latihan 1: Sistem Kontrol Robot
+
+1. **Setup:**# 📚 Panduan Git untuk Programmer Robotik
 
 ## 🎯 Tujuan Pembelajaran
 
 Setelah mempelajari materi ini, peserta akan mampu:
 
-* ✅ Memahami konsep version control dan mengapa penting
-* ✅ Menggunakan Git untuk mengelola proyek dengan percaya diri
-* ✅ Memahami workflow Git dari dasar hingga kolaborasi
+* ✅ Memahami konsep version control dan mengapa penting untuk proyek robotik
+* ✅ Menggunakan Git untuk mengelola kode robot dengan percaya diri
+* ✅ Memahami workflow Git dari dasar hingga kolaborasi tim robotik
 * ✅ Mengatasi masalah umum yang sering terjadi dalam Git
-* ✅ Bekerja dengan GitHub untuk kolaborasi tim
+* ✅ Bekerja dengan GitHub untuk kolaborasi dalam proyek robotik
 
 ---
 
@@ -16,12 +18,12 @@ Setelah mempelajari materi ini, peserta akan mampu:
 
 ### Apa itu Version Control?
 
-Bayangkan Anda sedang menulis skripsi. Setiap kali mengubah isi, Anda menyimpan dengan nama berbeda:
-- `skripsi_v1.docx`
-- `skripsi_v2.docx`
-- `skripsi_final.docx`
-- `skripsi_final_revisi.docx`
-- `skripsi_final_revisi_beneran.docx`
+Bayangkan Anda sedang mengembangkan kode robot. Setiap kali mengubah algoritma, Anda menyimpan dengan nama berbeda:
+- `robot_control_v1.py`
+- `robot_control_v2.py`
+- `robot_control_final.py`
+- `robot_control_final_fixed.py`
+- `robot_control_final_beneran_jalan.py`
 
 **Git** melakukan hal yang sama, tapi jauh lebih pintar! Git mencatat:
 - ✨ **Apa** yang berubah (baris mana yang ditambah/dihapus)
@@ -90,9 +92,9 @@ git config --global init.defaultBranch main
 **Tujuan:** Memahami 3 area kerja Git
 
 ```bash
-# Buat folder proyek
-mkdir proyek-website
-cd proyek-website
+# Buat folder proyek robot
+mkdir robot-arm-controller
+cd robot-arm-controller
 
 # Inisialisasi Git
 git init
@@ -100,7 +102,7 @@ git init
 
 **Output:**
 ```
-Initialized empty Git repository in /path/proyek-website/.git/
+Initialized empty Git repository in /path/robot-arm-controller/.git/
 ```
 
 **Cek status:**
@@ -125,16 +127,23 @@ nothing to commit (create/copy files and use "git add" to track)
 Mari kita buat file dan amati perubahannya:
 
 ```bash
-# Buat file HTML sederhana
-echo '<!DOCTYPE html>
-<html>
-<head>
-    <title>Website Saya</title>
-</head>
-<body>
-    <h1>Selamat datang!</h1>
-</body>
-</html>' > index.html
+# Buat file Python sederhana untuk kontrol motor
+echo '# Motor Control
+position = 0
+
+def move_forward():
+    global position
+    position += 10
+    print(f"Motor position: {position}")
+
+def move_backward():
+    global position
+    position -= 10
+    print(f"Motor position: {position}")
+
+# Test motor
+move_forward()
+move_backward()' > motor.py
 
 # Cek status
 git status
@@ -146,17 +155,17 @@ On branch main
 No commits yet
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
-	index.html
+	motor.py
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-**💡 Penjelasan:** File `index.html` berada di **Working Directory** tapi belum dilacak Git.
+**💡 Penjelasan:** File `motor.py` berada di **Working Directory** tapi belum dilacak Git.
 
 #### Tahap 1: Pindahkan ke Staging Area
 
 ```bash
-git add index.html
+git add motor.py
 git status
 ```
 
@@ -166,7 +175,7 @@ On branch main
 No commits yet
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
-	new file:   index.html
+	new file:   motor.py
 ```
 
 **💡 Penjelasan:** Sekarang file berada di **Staging Area**, siap untuk di-commit.
@@ -174,7 +183,7 @@ Changes to be committed:
 #### Tahap 2: Commit ke Repository
 
 ```bash
-git commit -m "Tambah halaman utama website"
+git commit -m "Add basic motor control"
 git status
 ```
 
@@ -198,7 +207,7 @@ commit a1b2c3d4e5f6g7h8i9j0 (HEAD -> main)
 Author: John Doe <john.doe@email.com>
 Date:   Mon Jan 15 10:30:00 2024 +0700
 
-    Tambah halaman utama website
+    Add basic motor control
 ```
 
 **Variasi git log yang berguna:**
@@ -217,8 +226,10 @@ git log -5
 ### 🔬 Percobaan 4: Mengubah File dan Melihat Perbedaan
 
 ```bash
-# Ubah file index.html
-echo '    <p>Ini adalah paragraph baru!</p>' >> index.html
+# Tambahkan fungsi stop motor
+echo '
+def stop():
+    print("Motor stopped")' >> motor.py
 
 # Lihat perbedaannya
 git diff
@@ -226,16 +237,17 @@ git diff
 
 **Output:**
 ```diff
-diff --git a/index.html b/index.html
+diff --git a/motor.py b/motor.py
 index 1234567..abcdefg 100644
---- a/index.html
-+++ b/index.html
-@@ -5,4 +5,5 @@
- </head>
- <body>
-     <h1>Selamat datang!</h1>
-+    <p>Ini adalah paragraph baru!</p>
- </body>
+--- a/motor.py
++++ b/motor.py
+@@ -10,3 +10,6 @@ def move_backward():
+ # Test motor
+ move_forward()
+ move_backward()
++
++def stop():
++    print("Motor stopped")
 ```
 
 **💡 Penjelasan:**
@@ -244,21 +256,21 @@ index 1234567..abcdefg 100644
 
 ```bash
 # Commit perubahan
-git add index.html
-git commit -m "Tambah paragraph baru di halaman utama"
+git add motor.py
+git commit -m "Add stop function"
 ```
 
 ### 🔬 Percobaan 5: Membuat dan Bekerja dengan Branch
 
 **Mengapa butuh branch?**
-Bayangkan Anda ingin menambah fitur baru tapi tidak ingin merusak kode yang sudah jalan. Branch memungkinkan Anda bekerja di "jalur paralel".
+Bayangkan Anda ingin menambah sensor ultrasonic ke robot tapi tidak ingin merusak kode motor yang sudah jalan. Branch memungkinkan Anda bekerja di "jalur paralel".
 
 ```bash
 # Lihat branch yang ada
 git branch
 
-# Buat branch baru untuk fitur contact
-git branch fitur-contact
+# Buat branch baru untuk fitur sensor
+git branch fitur-sensor
 
 # Lihat branch lagi
 git branch
@@ -266,17 +278,17 @@ git branch
 
 **Output:**
 ```
-  fitur-contact
+  fitur-sensor
 * main
 ```
 
 **💡 Penjelasan:** Tanda `*` menunjukkan branch aktif.
 
 ```bash
-# Pindah ke branch fitur-contact
-git checkout fitur-contact
+# Pindah ke branch fitur-sensor
+git checkout fitur-sensor
 # atau gunakan perintah modern:
-git switch fitur-contact
+git switch fitur-sensor
 
 # Cek posisi sekarang
 git branch
@@ -284,29 +296,35 @@ git branch
 
 **Output:**
 ```
-* fitur-contact
+* fitur-sensor
   main
 ```
 
 #### Bekerja di Branch Baru
 
 ```bash
-# Buat halaman contact
-echo '<!DOCTYPE html>
-<html>
-<head>
-    <title>Kontak - Website Saya</title>
-</head>
-<body>
-    <h1>Hubungi Kami</h1>
-    <p>Email: kontak@websitesaya.com</p>
-    <p>Telepon: 021-1234567</p>
-</body>
-</html>' > contact.html
+# Buat file sensor sederhana
+echo '# Sensor Ultrasonic
+def read_distance():
+    distance = 25  # contoh pembacaan
+    print(f"Distance: {distance} cm")
+    return distance
 
-# Commit di branch fitur-contact
-git add contact.html
-git commit -m "Tambah halaman contact"
+def check_obstacle():
+    distance = read_distance()
+    if distance < 10:
+        print("Obstacle detected!")
+        return True
+    else:
+        print("Path clear")
+        return False
+
+# Test sensor
+check_obstacle()' > sensor.py
+
+# Commit di branch fitur-sensor
+git add sensor.py
+git commit -m "Add ultrasonic sensor"
 
 # Lihat log
 git log --oneline
@@ -314,26 +332,26 @@ git log --oneline
 
 **Output:**
 ```
-b2c3d4e (HEAD -> fitur-contact) Tambah halaman contact
-a1b2c3d (main) Tambah paragraph baru di halaman utama
-9z8y7x6 Tambah halaman utama website
+b2c3d4e (HEAD -> fitur-sensor) Add ultrasonic sensor
+a1b2c3d (main) Add stop function
+9z8y7x6 Add basic motor control
 ```
 
 ### 🔬 Percobaan 6: Memahami Merge
 
-Sekarang mari gabungkan fitur contact ke branch main:
+Sekarang mari gabungkan fitur sensor ke branch main:
 
 ```bash
 # Kembali ke branch main
 git switch main
 
-# Cek isi folder (tidak ada contact.html)
+# Cek isi folder (tidak ada sensor.py)
 ls
 
-# Merge branch fitur-contact
-git merge fitur-contact
+# Merge branch fitur-sensor
+git merge fitur-sensor
 
-# Cek isi folder lagi (sekarang ada contact.html)
+# Cek isi folder lagi (sekarang ada sensor.py)
 ls
 ```
 
@@ -341,9 +359,9 @@ ls
 ```
 Updating a1b2c3d..b2c3d4e
 Fast-forward
- contact.html | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 contact.html
+ sensor.py | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 sensor.py
 ```
 
 **💡 Penjelasan Fast-forward:** Git hanya memindahkan pointer main ke commit terbaru karena tidak ada konflik.
@@ -354,79 +372,108 @@ Mari kita buat situasi konflik untuk belajar menanganinya:
 
 ```bash
 # Buat branch baru dari main
-git checkout -b fitur-header
+git checkout -b fitur-servo
 
-# Ubah index.html
-sed -i 's/<h1>Selamat datang!<\/h1>/<h1>Selamat Datang di Website Keren!<\/h1>/' index.html
+# Tambahkan servo control ke motor.py
+echo '
+def set_servo(angle):
+    if 0 <= angle <= 180:
+        print(f"Servo set to {angle} degrees")
+    else:
+        print("Invalid angle!")' >> motor.py
 
-git add index.html
-git commit -m "Update header menjadi lebih menarik"
+git add motor.py
+git commit -m "Add servo control"
 
 # Kembali ke main dan buat perubahan berbeda di tempat yang sama
 git switch main
-sed -i 's/<h1>Selamat datang!<\/h1>/<h1>Welcome to My Site!<\/h1>/' index.html
+echo '
+def calibrate():
+    print("Motor calibrated")' >> motor.py
 
-git add index.html
-git commit -m "Update header ke bahasa Inggris"
+git add motor.py
+git commit -m "Add calibration"
 
 # Coba merge (akan terjadi konflik!)
-git merge fitur-header
+git merge fitur-servo
 ```
 
 **Output konflik:**
 ```
-Auto-merging index.html
-CONFLICT (content): Merge conflict in index.html
+Auto-merging motor.py
+CONFLICT (content): Merge conflict in motor.py
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
 **Lihat file yang konflik:**
 ```bash
-cat index.html
+tail -10 motor.py
 ```
 
 **Output:**
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Website Saya</title>
-</head>
-<body>
+```python
+# Test motor
+move_forward()
+move_backward()
+
+def stop():
+    print("Motor stopped")
 <<<<<<< HEAD
-    <h1>Welcome to My Site!</h1>
+
+def calibrate():
+    print("Motor calibrated")
 =======
-    <h1>Selamat Datang di Website Keren!</h1>
->>>>>>> fitur-header
-    <p>Ini adalah paragraph baru!</p>
-</body>
-</html>
+
+def set_servo(angle):
+    if 0 <= angle <= 180:
+        print(f"Servo set to {angle} degrees")
+    else:
+        print("Invalid angle!")
+>>>>>>> fitur-servo
 ```
 
 **💡 Penjelasan marker konflik:**
 - `<<<<<<< HEAD` = versi dari branch aktif (main)
 - `=======` = pemisah
-- `>>>>>>> fitur-header` = versi dari branch yang di-merge
+- `>>>>>>> fitur-servo` = versi dari branch yang di-merge
 
 **Cara menyelesaikan:**
 
 ```bash
 # Edit file untuk menyelesaikan konflik
-# Pilih salah satu atau gabungkan keduanya
-echo '<!DOCTYPE html>
-<html>
-<head>
-    <title>Website Saya</title>
-</head>
-<body>
-    <h1>Selamat Datang di Website Keren!</h1>
-    <p>Ini adalah paragraph baru!</p>
-</body>
-</html>' > index.html
+# Kita akan gabungkan kedua fungsi
+echo '# Motor Control
+position = 0
+
+def move_forward():
+    global position
+    position += 10
+    print(f"Motor position: {position}")
+
+def move_backward():
+    global position
+    position -= 10
+    print(f"Motor position: {position}")
+
+def stop():
+    print("Motor stopped")
+
+def calibrate():
+    print("Motor calibrated")
+
+def set_servo(angle):
+    if 0 <= angle <= 180:
+        print(f"Servo set to {angle} degrees")
+    else:
+        print("Invalid angle!")
+
+# Test motor
+move_forward()
+move_backward()' > motor.py
 
 # Commit penyelesaian konflik
-git add index.html
-git commit -m "Resolve merge conflict: gunakan header bahasa Indonesia"
+git add motor.py
+git commit -m "Merge servo and calibration features"
 ```
 
 ### 🔬 Percobaan 8: Bekerja dengan Remote Repository (GitHub)
@@ -434,14 +481,14 @@ git commit -m "Resolve merge conflict: gunakan header bahasa Indonesia"
 #### Setup GitHub
 
 1. Buat akun di [github.com](https://github.com)
-2. Buat repository baru dengan nama `proyek-website`
+2. Buat repository baru dengan nama `robot-arm-controller`
 3. **Jangan** centang "Initialize with README"
 
 #### Hubungkan Repository Lokal ke GitHub
 
 ```bash
 # Tambahkan remote origin
-git remote add origin https://github.com/username/proyek-website.git
+git remote add origin https://github.com/username/robot-arm-controller.git
 
 # Lihat remote yang terdaftar
 git remote -v
@@ -449,8 +496,8 @@ git remote -v
 
 **Output:**
 ```
-origin  https://github.com/username/proyek-website.git (fetch)
-origin  https://github.com/username/proyek-website.git (push)
+origin  https://github.com/username/robot-arm-controller.git (fetch)
+origin  https://github.com/username/robot-arm-controller.git (push)
 ```
 
 #### Push ke GitHub
@@ -474,10 +521,10 @@ mkdir backup
 cd backup
 
 # Clone repository
-git clone https://github.com/username/proyek-website.git
+git clone https://github.com/username/robot-arm-controller.git
 
 # Masuk ke folder hasil clone
-cd proyek-website
+cd robot-arm-controller
 
 # Lihat history
 git log --oneline
@@ -489,22 +536,39 @@ Simulasi bekerja dalam tim:
 
 ```bash
 # Buat branch untuk fitur baru
-git checkout -b fitur-footer
+git checkout -b fitur-led
 
-# Tambahkan footer
-echo '    <footer>
-        <p>&copy; 2024 Website Saya. All rights reserved.</p>
-    </footer>' >> index.html
+# Tambahkan kontrol LED sederhana
+echo '# LED Control
+led_status = False
 
-git add index.html
-git commit -m "Tambah footer copyright"
+def turn_on():
+    global led_status
+    led_status = True
+    print("LED ON")
+
+def turn_off():
+    global led_status
+    led_status = False
+    print("LED OFF")
+
+def blink():
+    turn_on()
+    turn_off()
+    print("LED blinked")
+
+# Test LED
+blink()' > led.py
+
+git add led.py
+git commit -m "Add LED control for robot status"
 
 # Push branch ke GitHub
-git push -u origin fitur-footer
+git push -u origin fitur-led
 ```
 
 **Di GitHub:**
-1. Buat Pull Request dari `fitur-footer` ke `main`
+1. Buat Pull Request dari `fitur-led` ke `main`
 2. Review kode
 3. Merge Pull Request
 
@@ -515,7 +579,7 @@ git switch main
 git pull origin main
 
 # Hapus branch yang sudah di-merge
-git branch -d fitur-footer
+git branch -d fitur-led
 ```
 
 ---
@@ -556,54 +620,462 @@ git revert commit_hash
 
 ```bash
 # Hapus dari Git tapi tetap di working directory
-git rm --cached file_rahasia.txt
-git commit -m "Remove sensitive file from tracking"
+git rm --cached config.json
+git commit -m "Remove config file from tracking"
 
 # Tambahkan ke .gitignore
-echo "file_rahasia.txt" >> .gitignore
+echo "config.json
+*.pyc
+__pycache__/
+.env
+*.log" >> .gitignore
 git add .gitignore
-git commit -m "Add .gitignore"
+git commit -m "Add .gitignore for Python and config files"
 ```
 
 ---
 
 ## 📋 Latihan Praktis Mandiri
 
-### Latihan 1: Blog Pribadi
+### Latihan 1: Sistem Kontrol Robot
 
 1. **Setup:**
    ```bash
-   mkdir blog-pribadi
-   cd blog-pribadi
+   mkdir simple-robot
+   cd simple-robot
    git init
    ```
 
-2. **Buat struktur:**
-   - `index.html` (halaman utama)
-   - `about.html` (tentang saya)
-   - `css/style.css` (stylesheet)
-   - `posts/` (folder untuk posting blog)
+2. **Buat struktur proyek sederhana:**
+   - `main.py` (program utama)
+   - `motor.py` (kontrol motor)
+   - `sensor.py` (baca sensor)
+   - `led.py` (indikator LED)
+   - `README.md` (dokumentasi)
 
-3. **Workflow:**
-   - Buat branch untuk setiap fitur baru
-   - Commit perubahan secara berkala
-   - Merge ke main setelah fitur selesai
-
-4. **Challenge:**
-   - Buat konflik sengaja dan selesaikan
-   - Upload ke GitHub
-   - Buat Pull Request
-
-### Latihan 2: Proyek Tim (Simulasi)
-
-1. **Clone repository teman** (atau buat dummy)
-2. **Buat branch untuk kontribusi:**
+3. **Contoh file main.py:**
    ```bash
-   git checkout -b kontribusi-nama-anda
+   echo '# Robot Main Program
+import motor
+import sensor
+import led
+
+def robot_start():
+    print("Robot starting...")
+    led.turn_on()
+    
+    # Cek sensor
+    if sensor.check_obstacle():
+        motor.stop()
+        led.blink()
+    else:
+        motor.move_forward()
+    
+    print("Robot ready!")
+
+# Run robot
+robot_start()' > main.py
    ```
-3. **Tambahkan fitur atau perbaikan**
-4. **Push dan buat Pull Request**
-5. **Review kode teman dan berikan feedback**
+
+4. **Workflow latihan:**
+   - Buat branch untuk setiap modul
+   - Commit setiap perubahan
+   - Merge ke main setelah testing
+
+### Latihan 2: Sensor dan Aktuator
+
+1. **Buat proyek sensor:**
+   ```bash
+   mkdir robot-sensors
+   cd robot-sensors
+   git init
+   ```
+
+2. **File sensor sederhana:**
+   ```bash
+   # Temperature sensor
+   echo '# Temperature Sensor
+def read_temp():
+    temp = 25.5  # contoh suhu
+    print(f"Temperature: {temp}°C")
+    return temp
+
+def check_overheat():
+    temp = read_temp()
+    if temp > 50:
+        print("OVERHEAT WARNING!")
+        return True
+    return False' > temp_sensor.py
+   
+   # Light sensor  
+   echo '# Light Sensor
+def read_light():
+    light = 512  # contoh nilai ADC 0-1024
+    print(f"Light level: {light}")
+    return light
+
+def is_dark():
+    light = read_light()
+    return light < 200' > light_sensor.py
+   ```
+
+3. **Integration file:**
+   ```bash
+   echo '# Sensor Integration
+import temp_sensor
+import light_sensor
+
+def check_all_sensors():
+    print("=== Sensor Status ===")
+    
+    # Check temperature
+    if temp_sensor.check_overheat():
+        print("⚠️  Temperature warning")
+    else:
+        print("✅ Temperature OK")
+    
+    # Check light
+    if light_sensor.is_dark():
+        print("🌙 Dark environment")
+    else:
+        print("☀️  Bright environment")
+
+# Run check
+check_all_sensors()' > sensor_check.py
+   ```
+
+### Latihan 3: Proyek Tim Line Follower
+
+1. **Skenario tim 4 orang:**
+   - **Person A**: Motor control
+   - **Person B**: Line sensor
+   - **Person C**: Decision logic
+   - **Person D**: LED indicators
+
+2. **Pembagian file:**
+   ```bash
+   # Person A - Motor
+   echo '# Motor Control for Line Follower
+speed = 100
+
+def go_straight():
+    print(f"Motors: L={speed}, R={speed}")
+
+def turn_left():
+    print(f"Motors: L={speed//2}, R={speed}")
+
+def turn_right():
+    print(f"Motors: L={speed}, R={speed//2}")
+
+def stop():
+    print("Motors: STOP")' > motor_control.py
+   
+   # Person B - Sensor
+   echo '# Line Sensor Array
+sensors = [0, 0, 1, 0, 0]  # 5 sensor array
+
+def read_sensors():
+    # Simulasi pembacaan sensor
+    print(f"Sensors: {sensors}")
+    return sensors
+
+def find_line_position():
+    sensors = read_sensors()
+    # Hitung posisi garis (-2 to +2)
+    position = 0
+    total = sum(sensors)
+    if total > 0:
+        weighted_sum = sum(i * sensors[i] for i in range(5))
+        position = (weighted_sum / total) - 2
+    return position' > line_sensor.py
+   
+   # Person C - Logic
+   echo '# Line Following Logic
+import motor_control
+import line_sensor
+
+def follow_line():
+    position = line_sensor.find_line_position()
+    
+    if abs(position) < 0.5:
+        motor_control.go_straight()
+    elif position > 0.5:
+        motor_control.turn_right()
+    elif position < -0.5:
+        motor_control.turn_left()
+    else:
+        motor_control.stop()
+        
+    print(f"Line position: {position}")
+
+# Main loop
+for i in range(5):
+    follow_line()' > line_following.py
+   ```
+
+### Latihan 4: Robot Penjaga Sederhana
+
+```bash
+mkdir guard-robot
+cd guard-robot
+git init
+
+# Main program
+echo '# Guard Robot
+import time
+
+# Sensor simulasi
+def detect_motion():
+    import random
+    return random.choice([True, False])
+
+# Aksi robot
+def sound_alarm():
+    print("🚨 ALARM! Motion detected!")
+
+def patrol():
+    print("🤖 Patrolling...")
+
+def sleep_mode():
+    print("😴 Sleep mode")
+
+# Main loop
+def guard_system():
+    print("Guard Robot Active")
+    
+    for minute in range(10):  # Simulasi 10 menit
+        print(f"Time: {minute}:00")
+        
+        if detect_motion():
+            sound_alarm()
+            patrol()
+        else:
+            sleep_mode()
+        
+        time.sleep(1)  # Tunggu 1 detik
+    
+    print("Guard duty complete")
+
+# Start guard
+guard_system()' > guard_robot.py
+``` ## 📝 Template .gitignore untuk Proyek Robotik
+
+```bash
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environment
+venv/
+env/
+.env
+
+# IDE files
+.vscode/
+*.swp
+*~
+
+# Log files
+*.log
+debug.txt
+
+# Configuration files
+config.json
+settings.ini
+
+# Data files
+data/
+*.csv
+*.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+```
+
+---
+
+## 🎯 Best Practices untuk Robotics
+
+### 1. **Pesan Commit yang Baik**
+```bash
+# ❌ Buruk
+git commit -m "fix"
+git commit -m "update motor"
+
+# ✅ Baik  
+git commit -m "Fix motor stop function"
+git commit -m "Add sensor reading validation"
+git commit -m "Improve robot response time"
+```
+
+### 2. **Branch Naming Sederhana**
+```bash
+git checkout -b add-sensor
+git checkout -b fix-motor  
+git checkout -b test-led
+git checkout -b new-feature
+```
+
+### 3. **Commit Frequency**
+- Commit setelah setiap fungsi selesai
+- Commit sebelum coba hal baru
+- Commit setelah testing berhasil
+- **Jangan** commit kode yang error
+
+### 4. **File Organization Sederhana**
+```
+simple-robot/
+├── main.py        # Program utama
+├── motor.py       # Kontrol motor  
+├── sensor.py      # Baca sensor
+├── led.py         # LED indicator
+├── README.md      # Dokumentasi
+└── .gitignore     # File yang diabaikan
+```
+
+---
+
+## ✅ Checklist Mahir Git untuk Robotics
+
+- [ ] Bisa init repository dan commit kode robot pertama
+- [ ] Paham working directory, staging, dan repository  
+- [ ] Bisa buat dan merge branch untuk fitur robot berbeda
+- [ ] Bisa selesaikan merge conflict pada kode Python
+- [ ] Bisa push/pull dari GitHub untuk proyek robotik
+- [ ] Paham workflow Pull Request untuk review kode
+- [ ] Bisa menggunakan .gitignore untuk file Python
+- [ ] Bisa reset/revert commit jika ada bug
+- [ ] Bisa kolaborasi dalam tim pengembangan robot
+- [ ] Bisa manage proyek robotik dengan Git
+
+---
+
+## 🎮 Challenge Akhir: Robot Simulator
+
+Buat proyek robot simulator sederhana dengan Git:
+
+```bash
+mkdir robot-simulator
+cd robot-simulator
+git init
+
+# File utama
+echo '# Robot Simulator
+import random
+import time
+
+# Robot state
+robot = {
+    "x": 0,
+    "y": 0, 
+    "battery": 100,
+    "status": "idle"
+}
+
+def move_robot(direction):
+    """Move robot in direction"""
+    global robot
+    
+    if robot["battery"] <= 0:
+        print("❌ Battery empty!")
+        return
+        
+    if direction == "up":
+        robot["y"] += 1
+    elif direction == "down":
+        robot["y"] -= 1
+    elif direction == "left":
+        robot["x"] -= 1
+    elif direction == "right":
+        robot["x"] += 1
+    
+    robot["battery"] -= 10
+    print(f"🤖 Robot at ({robot["x"]}, {robot["y"]}) - Battery: {robot["battery"]}%")
+
+def scan_area():
+    """Scan for obstacles"""
+    obstacles = random.choice([True, False])
+    if obstacles:
+        print("⚠️  Obstacle detected!")
+    else:
+        print("✅ Area clear")
+    return obstacles
+
+def charge_battery():
+    """Charge robot battery"""
+    global robot
+    robot["battery"] = 100
+    print("🔋 Battery charged!")
+
+def robot_demo():
+    """Demo robot movement"""
+    print("🚀 Robot Simulator Started")
+    
+    # Move robot around
+    moves = ["up", "right", "down", "left"]
+    
+    for move in moves:
+        move_robot(move)
+        scan_area()
+        time.sleep(1)
+        
+        # Charge if battery low
+        if robot["battery"] <= 20:
+            charge_battery()
+    
+    print("🏁 Demo complete!")
+
+# Run demo
+if __name__ == "__main__":
+    robot_demo()' > robot_sim.py
+
+# Commit
+git add robot_sim.py
+git commit -m "Add basic robot simulator"
+
+# Test
+python robot_sim.py
+```
+
+**Pengembangan lanjutan:**
+1. Buat branch untuk fitur baru (obstacle avoidance, pathfinding, dll)
+2. Tambahkan lebih banyak sensor simulasi
+3. Buat GUI sederhana jika mau
+4. Upload ke GitHub dan minta feedback
+
+---
+
+## 🔗 Sumber Belajar Lanjutan
+
+1. **Git Official**: [git-scm.com](https://git-scm.com/doc)
+2. **GitHub Guides**: [guides.github.com](https://guides.github.com/)
+3. **Interactive Git**: [learngitbranching.js.org](https://learngitbranching.js.org/)
+4. **Python untuk Robotik**: [realpython.com](https://realpython.com/)
+
+---
+
+## 🎉 Selamat!
+
+Anda sudah menguasai Git untuk proyek robotik! Sekarang Anda bisa:
+
+✅ **Manage kode robot** dengan version control  
+✅ **Berkolaborasi** dengan tim robotik  
+✅ **Backup dan restore** kode dengan aman  
+✅ **Experiment** tanpa takut merusak kode  
+✅ **Track perubahan** dan debug lebih mudah  
+
+**Next steps:** Coba buat proyek robot sendiri dan praktikkan semua yang sudah dipelajari!
+
+> 💡 **Tips Terakhir:** Git adalah tool yang dipelajari dengan praktek. Jangan takut salah - hampir semua masalah Git bisa diperbaiki! Start small, practice often! 🚀
 
 ---
 
@@ -626,17 +1098,60 @@ git commit -m "Add .gitignore"
 
 ---
 
-## ✅ Checklist Mahir Git
+## ✅ Checklist Mahir Git untuk Robotics
 
-- [ ] Bisa init repository dan commit pertama
+- [ ] Bisa init repository dan commit kode robot pertama
 - [ ] Paham working directory, staging, dan repository
-- [ ] Bisa buat dan merge branch tanpa konflik
-- [ ] Bisa selesaikan merge conflict
-- [ ] Bisa push/pull dari GitHub
-- [ ] Paham workflow Pull Request
-- [ ] Bisa menggunakan .gitignore
-- [ ] Bisa reset/revert commit
-- [ ] Bisa kolaborasi dalam tim
+- [ ] Bisa buat dan merge branch untuk fitur robot berbeda
+- [ ] Bisa selesaikan merge conflict pada kode C/Python
+- [ ] Bisa push/pull dari GitHub untuk proyek robotik
+- [ ] Paham workflow Pull Request untuk review kode
+- [ ] Bisa menggunakan .gitignore untuk file robotik
+- [ ] Bisa reset/revert commit jika ada bug
+- [ ] Bisa kolaborasi dalam tim pengembangan robot
+- [ ] Bisa manage dependencies dan build tools (Makefile, requirements.txt)
+
+## 🎯 Best Practices untuk Robotics
+
+### 1. **Pesan Commit yang Baik**
+```bash
+# ❌ Buruk
+git commit -m "fix bug"
+git commit -m "update"
+
+# ✅ Baik  
+git commit -m "Fix PID controller oscillation in motor control"
+git commit -m "Add emergency stop function to robot arm"
+git commit -m "Improve sensor fusion algorithm accuracy"
+```
+
+### 2. **Branch Naming Convention**
+```bash
+# Format: jenis/deskripsi-singkat
+git checkout -b feature/ultrasonic-sensor
+git checkout -b bugfix/pid-oscillation  
+git checkout -b hotfix/emergency-stop
+git checkout -b experiment/new-algorithm
+```
+
+### 3. **Commit Frequency**
+- Commit setelah setiap fungsi selesai
+- Commit sebelum eksperimen besar
+- Commit setelah testing berhasil
+- **Jangan** commit kode yang tidak bisa di-compile
+
+### 4. **File Organization**
+```
+robot-project/
+├── src/           # Source code
+├── include/       # Header files (C/C++)
+├── tests/         # Unit tests
+├── docs/          # Documentation
+├── config/        # Configuration files  
+├── scripts/       # Build/deployment scripts
+├── data/          # Sample data, calibration
+└── hardware/      # PCB designs, CAD files
+```
 
 ---
 
