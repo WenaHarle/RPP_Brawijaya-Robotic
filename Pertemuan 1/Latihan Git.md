@@ -288,7 +288,7 @@ git branch
 # Pindah ke branch fitur-sensor
 git checkout fitur-sensor
 # atau gunakan perintah modern:
-git switch fitur-sensor
+git checkout fitur-sensor
 
 # Cek posisi sekarang
 git branch
@@ -343,7 +343,7 @@ Sekarang mari gabungkan fitur sensor ke branch main:
 
 ```bash
 # Kembali ke branch main
-git switch main
+git checkout main
 
 # Cek isi folder (tidak ada sensor.py)
 ls
@@ -386,7 +386,7 @@ git add motor.py
 git commit -m "Add servo control"
 
 # Kembali ke main dan buat perubahan berbeda di tempat yang sama
-git switch main
+git checkout main
 echo '
 def calibrate():
     print("Motor calibrated")' >> motor.py
@@ -575,7 +575,7 @@ git push -u origin fitur-led
 **Kembali ke lokal:**
 ```bash
 # Update main branch
-git switch main
+git checkout main
 git pull origin main
 
 # Hapus branch yang sudah di-merge
