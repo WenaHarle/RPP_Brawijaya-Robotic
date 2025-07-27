@@ -626,18 +626,6 @@ git checkout -b new-feature
 - Commit sebelum coba hal baru
 - Commit setelah testing berhasil
 - **Jangan** commit kode yang error
-
-### 4. **File Organization Sederhana**
-```
-simple-robot/
-├── main.py        # Program utama
-├── motor.py       # Kontrol motor  
-├── sensor.py      # Baca sensor
-├── led.py         # LED indicator
-├── README.md      # Dokumentasi
-└── .gitignore     # File yang diabaikan
-```
-
 ---
 
 ## 🔗 Sumber Belajar Lanjutan
