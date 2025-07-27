@@ -1,4 +1,4 @@
-# 📚 Panduan Git Lengkap & Mudah Dipahami
+# 📚 Panduan Git
 
 ## 🎯 Tujuan Pembelajaran
 
