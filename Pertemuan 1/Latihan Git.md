@@ -1,6 +1,4 @@
-### Latihan 1: Sistem Kontrol Robot
-
-1. **Setup:**# 📚 Panduan Git untuk Programmer Robotik
+# 📚 Panduan Git untuk Programmer Robotik
 
 ## 🎯 Tujuan Pembelajaran
 
@@ -670,18 +668,5 @@ Anda sudah menguasai Git untuk proyek robotik! Sekarang Anda bisa:
 | **Remote** | `git pull` | Ambil dari server | Sinkronisasi |
 
 ---
-
-## ✅ Checklist Mahir Git untuk Robotics
-
-- [ ] Bisa init repository dan commit kode robot pertama
-- [ ] Paham working directory, staging, dan repository
-- [ ] Bisa buat dan merge branch untuk fitur robot berbeda
-- [ ] Bisa selesaikan merge conflict pada kode C/Python
-- [ ] Bisa push/pull dari GitHub untuk proyek robotik
-- [ ] Paham workflow Pull Request untuk review kode
-- [ ] Bisa menggunakan .gitignore untuk file robotik
-- [ ] Bisa reset/revert commit jika ada bug
-- [ ] Bisa kolaborasi dalam tim pengembangan robot
-- [ ] Bisa manage dependencies dan build tools (Makefile, requirements.txt)
 
 > 💡 **Tips Sukses:** Git adalah skill yang dipelajari dengan praktek. Jangan takut salah - hampir semua masalah Git bisa diperbaiki!
