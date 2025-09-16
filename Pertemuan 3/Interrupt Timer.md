@@ -334,12 +334,3 @@ void loop() {
 * Sangat berguna untuk sistem real-time yang butuh **jadwal periodik stabil**.
 
 ---
-
-👉 Dengan pemahaman ini, siswa akan paham perbedaan:
-
-* **Polling (delay, millis)** → manual cek waktu.
-* **Timer Interrupt** → alarm otomatis yang presisi tinggi.
-
----
-
-Apakah kamu ingin saya tambahkan **diagram blok alur Timer Interrupt (clock → timer → compare match → ISR)** supaya modul ini lebih visual?
