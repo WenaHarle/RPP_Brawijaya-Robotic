@@ -262,7 +262,7 @@ void setup() {
 
 ---
 
-## 🎯 Praktikum 1: Multitasking Sederhana
+## 🎯 Multitasking Sederhana
 
 ### Tujuan:
 Membuat 2 task yang berjalan bersamaan:
@@ -805,7 +805,7 @@ void loop() {}
 
 ---
 
-## 🧪 Praktikum 2: Sistem Monitoring Suhu dengan Alarm
+## 🧪 Sistem Monitoring Suhu dengan Alarm
 
 ### Tujuan:
 Membuat sistem monitoring suhu dengan fitur:
@@ -1014,7 +1014,7 @@ void loop() {
 
 ---
 
-## 🎯 Praktikum 3: Advanced - Smart Home Controller
+## 🎯 Advanced - Smart Home Controller
 
 ### Tujuan:
 Membuat sistem smart home dengan:
