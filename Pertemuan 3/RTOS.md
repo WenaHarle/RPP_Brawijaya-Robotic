@@ -592,9 +592,58 @@ void loop() {}
 ## 🔒 Sinkronisasi Task - Semaphore
 
 ### Apa itu Semaphore?
-Semaphore adalah mekanisme sinkronisasi yang mengontrol akses ke shared resource. Ada 2 jenis:
-1. **Binary Semaphore**: Seperti boolean (0 atau 1)
-2. **Counting Semaphore**: Counter (0, 1, 2, 3, ...)
+* **Semaphore = sinyal/penanda** untuk mengatur akses ke resource.
+* Bisa dipakai untuk:
+
+  * Membatasi **jumlah task** yang boleh masuk.
+  * Sinkronisasi antar task (misalnya Task A memberi sinyal ke Task B).
+
+### Jenis Semaphore
+
+* **Counting Semaphore** → bisa lebih dari 1 resource. Misal ada **3 kursi kosong**, jadi bisa dipakai 3 anak sekaligus. Kalau kursi habis → yang lain harus nunggu.
+* **Binary Semaphore** → hanya 0/1 (kosong atau penuh). Cocok untuk **sinyal** atau **resource tunggal**.
+
+### Contoh di FreeRTOS
+
+```cpp
+#include <Arduino_FreeRTOS.h>
+#include <semphr.h>
+
+SemaphoreHandle_t xSemaphore;
+
+void TaskA(void *pvParameters) {
+  while (1) {
+    if (xSemaphoreTake(xSemaphore, portMAX_DELAY)) {  // ambil semaphore
+      Serial.println("Task A jalan");
+      vTaskDelay(1000 / portTICK_PERIOD_MS);
+      xSemaphoreGive(xSemaphore); // kembalikan semaphore
+    }
+  }
+}
+
+void TaskB(void *pvParameters) {
+  while (1) {
+    if (xSemaphoreTake(xSemaphore, portMAX_DELAY)) {
+      Serial.println("Task B jalan");
+      vTaskDelay(1000 / portTICK_PERIOD_MS);
+      xSemaphoreGive(xSemaphore);
+    }
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  xSemaphore = xSemaphoreCreateBinary();
+  xSemaphoreGive(xSemaphore); // kasih "tiket" awal
+  
+  xTaskCreate(TaskA, "TaskA", 128, NULL, 1, NULL);
+  xTaskCreate(TaskB, "TaskB", 128, NULL, 1, NULL);
+  vTaskStartScheduler();
+}
+
+void loop() {}
+```
+📌 Hasil: Task A dan Task B **bergantian**, tidak bisa bareng-bareng masuk.
 
 ### Binary Semaphore - Signaling antar Task
 
@@ -668,7 +717,54 @@ void loop() {}
 ## 🛡️ Mutual Exclusion - Mutex
 
 ### Apa itu Mutex?
-Mutex (Mutual Exclusion) adalah special semaphore yang memastikan hanya 1 task yang bisa mengakses shared resource pada satu waktu.
+* **Mutex** = jenis khusus dari Binary Semaphore.
+* Dipakai untuk **mutual exclusion** → memastikan **hanya satu task** yang boleh akses resource pada suatu waktu.
+* Biasanya dipakai untuk **resource kritis**: port serial, I2C, LCD, file.
+
+### Bedanya dengan Semaphore
+* Semaphore bisa di-*give* oleh task lain.
+* Mutex hanya boleh di-*give* oleh task yang mengambilnya → lebih aman (ada kepemilikan).
+* Mutex punya fitur **priority inheritance** → mencegah deadlock karena prioritas rendah menghalangi task prioritas tinggi.
+
+### Contoh di FreeRTOS
+
+```cpp
+#include <Arduino_FreeRTOS.h>
+#include <semphr.h>
+
+SemaphoreHandle_t xMutex;
+
+void TaskPrintA(void *pvParameters) {
+  while (1) {
+    if (xSemaphoreTake(xMutex, portMAX_DELAY)) {
+      Serial.println("Task A pakai Serial");
+      vTaskDelay(500 / portTICK_PERIOD_MS);
+      xSemaphoreGive(xMutex);
+    }
+  }
+}
+
+void TaskPrintB(void *pvParameters) {
+  while (1) {
+    if (xSemaphoreTake(xMutex, portMAX_DELAY)) {
+      Serial.println("Task B pakai Serial");
+      vTaskDelay(500 / portTICK_PERIOD_MS);
+      xSemaphoreGive(xMutex);
+    }
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  xMutex = xSemaphoreCreateMutex();
+  
+  xTaskCreate(TaskPrintA, "TaskA", 128, NULL, 1, NULL);
+  xTaskCreate(TaskPrintB, "TaskB", 128, NULL, 1, NULL);
+  vTaskStartScheduler();
+}
+
+void loop() {}
+```
 
 ### Contoh: Shared Serial Port
 
